@@ -79,6 +79,24 @@ class ModelBackpackCommand extends GeneratorCommand
     }
 
     /**
+     * Replace Model on MongoDB.
+     *
+     * @param  string  $stub
+     * @param  string  $name
+     * @return string
+     */
+    protected function replaceDriverDB(&$stub)
+    {
+        $driver = \Schema::getConnection()->getConfig('driver');
+
+        if ($driver === 'mongodb') {
+            $stub = str_replace(\Illuminate\Database\Eloquent\Model::class, \Jenssegers\Mongodb\Eloquent\Model::class, $stub);
+        }
+
+        return $this;
+    }
+
+    /**
      * Build the class with the given name.
      *
      * @param  string  $name
@@ -88,7 +106,7 @@ class ModelBackpackCommand extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceClass($stub, $name);
+        return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceDriverDB($stub)->replaceClass($stub, $name);
     }
 
     /**

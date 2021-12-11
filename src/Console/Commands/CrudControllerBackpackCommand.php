@@ -101,8 +101,17 @@ class CrudControllerBackpackCommand extends GeneratorCommand
         if (count($model->getFillable())) {
             $attributes = $model->getFillable();
         } else {
+            $driver = \Schema::getConnection()->getConfig('driver');
+
             // otherwise, if guarded is used, just pick up the columns straight from the bd table
-            $attributes = \Schema::getColumnListing($model->getTable());
+            switch ($driver) {
+                case 'mongodb':
+                    $attributes = [];
+                    break;
+                default:
+                    $attributes = \Schema::getColumnListing($model->getTable());
+                    break;
+            }
         }
 
         return $attributes;
