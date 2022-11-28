@@ -108,16 +108,4 @@ class ModelBackpackCommand extends GeneratorCommand
 
         return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceDriverDB($stub)->replaceClass($stub, $name);
     }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-
-        ];
-    }
 }

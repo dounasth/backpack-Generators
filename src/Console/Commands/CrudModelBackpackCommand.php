@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class CrudModelBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
+
     /**
      * The console command name.
      *
@@ -54,6 +56,9 @@ class CrudModelBackpackCommand extends GeneratorCommand
         $name = $this->getNameInput();
         $namespaceApp = $this->qualifyClass($this->getNameInput());
         $namespaceModels = $this->qualifyClass('/Models/'.$this->getNameInput());
+        $relativePath = lcfirst(Str::of("$namespaceModels.php")->replace('\\', '/'));
+
+        $this->progressBlock("Creating Model <fg=blue>$relativePath</>");
 
         // Check if exists on app or models
         $existsOnApp = $this->alreadyExists($namespaceApp);
@@ -67,10 +72,13 @@ class CrudModelBackpackCommand extends GeneratorCommand
 
             $this->files->put($this->getPath($namespaceModels), $this->sortImports($this->buildClass($namespaceModels)));
 
-            $this->info($this->type.' created successfully.');
+            $this->closeProgressBlock();
 
-            return;
+            return false;
         }
+
+        // Model exists
+        $this->closeProgressBlock('Already existed', 'yellow');
 
         // If it was found on both namespaces, we'll ask user to pick one of them
         if ($existsOnApp && $existsOnModels) {
@@ -90,15 +98,17 @@ class CrudModelBackpackCommand extends GeneratorCommand
         // As the class already exists, we don't want to create the class and overwrite the
         // user's code. We just make sure it uses CrudTrait. We add that one line.
         if (! $this->hasOption('force') || ! $this->option('force')) {
+            $this->progressBlock('Adding CrudTrait to the Model');
+
             $file = $this->files->get($path);
             $lines = preg_split('/(\r\n)|\r|\n/', $file);
 
             // check if it already uses CrudTrait
             // if it does, do nothing
             if (Str::contains($file, $this->crudTrait)) {
-                $this->comment('Model already used CrudTrait.');
+                $this->closeProgressBlock('Already existed', 'yellow');
 
-                return;
+                return false;
             }
 
             // if it does not have CrudTrait, add the trait on the Model
@@ -123,14 +133,15 @@ class CrudModelBackpackCommand extends GeneratorCommand
                     $this->files->put($path, implode(PHP_EOL, $lines));
 
                     // let the user know what we've done
-                    $this->info('Model already existed. Added CrudTrait to it.');
+                    $this->closeProgressBlock();
 
-                    return;
+                    return false;
                 }
             }
 
             // In case we couldn't add the CrudTrait
-            $this->error("Model already existed on '$name' and we couldn't add CrudTrait. Please add it manually.");
+            $this->errorProgressBlock();
+            $this->note("Model already existed on '$name' and we couldn't add CrudTrait. Please add it manually.", 'red');
         }
     }
 
@@ -191,17 +202,5 @@ class CrudModelBackpackCommand extends GeneratorCommand
         $stub = $this->files->get($this->getStub());
 
         return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceDriverDB($stub)->replaceClass($stub, $name);
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-
-        ];
     }
 }
