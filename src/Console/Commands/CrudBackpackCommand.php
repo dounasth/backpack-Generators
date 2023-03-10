@@ -15,7 +15,7 @@ class CrudBackpackCommand extends BackpackCommand
      * @var string
      */
     protected $signature = 'backpack:crud {name}
-        {--validation= : Validation type, must be request, array or field}';
+        {--validation= : Validation type, must be request, array or field} {--force}';
 
     /**
      * The console command description.
@@ -52,14 +52,14 @@ class CrudBackpackCommand extends BackpackCommand
         }
 
         // Create the CRUD Model and show output
-        $this->call('backpack:crud-model', ['name' => $name]);
+        $this->call('backpack:crud-model', ['name' => $nameTitle, '--force' => $this->option('force')]);
 
         // Create the CRUD Controller and show output
-        $this->call('backpack:crud-controller', ['name' => $name, '--validation' => $validation]);
+        $this->call('backpack:crud-controller', ['name' => $nameTitle, '--validation' => $validation, '--force' => $this->option('force')]);
 
         // Create the CRUD Request and show output
         if ($validation === 'request') {
-            $this->call('backpack:crud-request', ['name' => $name]);
+            $this->call('backpack:crud-request', ['name' => $nameTitle, '--force' => $this->option('force')]);
         }
 
         // Create the CRUD route

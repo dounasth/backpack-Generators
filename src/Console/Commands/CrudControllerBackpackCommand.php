@@ -22,7 +22,7 @@ class CrudControllerBackpackCommand extends BackpackCommand
      * @var string
      */
     protected $signature = 'backpack:crud-controller {name}
-        {--validation=request : Validation type, must be request, array or field}';
+        {--validation=request : Validation type, must be request, array or field} {--force}';
 
     /**
      * The console command description.

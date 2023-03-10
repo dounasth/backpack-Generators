@@ -22,7 +22,7 @@ class CrudModelBackpackCommand extends BackpackCommand
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-model {name}';
+    protected $signature = 'backpack:crud-model {name} {--force}';
 
     /**
      * The console command description.
@@ -69,7 +69,7 @@ class CrudModelBackpackCommand extends BackpackCommand
         // If no model was found, we will generate the path to the location where this class file
         // should be written. Then, we will build the class and make the proper replacements on
         // the stub files so that it gets the correctly formatted namespace and class name.
-        if (! $existsOnApp && ! $existsOnModels) {
+        if ($this->option('force') || (! $existsOnApp && ! $existsOnModels)) {
             $this->makeDirectory($this->getPath($namespaceModels));
 
             $this->files->put($this->getPath($namespaceModels), $this->sortImports($this->buildClass($nameTitle)));

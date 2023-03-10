@@ -21,7 +21,7 @@ class CrudRequestBackpackCommand extends BackpackCommand
      *
      * @var string
      */
-    protected $signature = 'backpack:crud-request {name}';
+    protected $signature = 'backpack:crud-request {name} {--force}';
 
     /**
      * The console command description.
