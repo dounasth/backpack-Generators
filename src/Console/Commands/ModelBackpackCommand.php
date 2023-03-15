@@ -3,7 +3,6 @@
 namespace Backpack\Generators\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 class ModelBackpackCommand extends Command
 {
@@ -32,7 +31,6 @@ class ModelBackpackCommand extends Command
      * Execute the console command.
      *
      * @return bool|null
-     *
      */
     public function handle()
     {

@@ -31,7 +31,6 @@ class RequestBackpackCommand extends Command
      * Execute the console command.
      *
      * @return bool|null
-     *
      */
     public function handle()
     {
