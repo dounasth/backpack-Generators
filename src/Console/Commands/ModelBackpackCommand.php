@@ -2,10 +2,10 @@
 
 namespace Backpack\Generators\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
+use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
-class ModelBackpackCommand extends GeneratorCommand
+class ModelBackpackCommand extends Command
 {
     /**
      * The console command name.
@@ -19,7 +19,7 @@ class ModelBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'backpack:model {name} {--softdelete}';
+    protected $signature = 'backpack:model {name} {--force}';
 
     /**
      * The console command description.
@@ -29,65 +29,13 @@ class ModelBackpackCommand extends GeneratorCommand
     protected $description = 'Generate a backpack templated model';
 
     /**
-     * The type of class being generated.
+     * Execute the console command.
      *
-     * @var string
-     */
-    protected $type = 'Model';
-
-    /**
-     * Get the stub file for the generator.
+     * @return bool|null
      *
-     * @return string
      */
-    protected function getStub()
+    public function handle()
     {
-        if ($this->option('softdelete')) {
-            return __DIR__.'/../stubs/model-softdelete.stub';
-        }
-
-        return __DIR__.'/../stubs/model.stub';
-    }
-
-    /**
-     * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        return $rootNamespace.'\Models';
-    }
-
-    /**
-     * Replace the table name for the given stub.
-     *
-     * @param  string  $stub
-     * @param  string  $name
-     * @return string
-     */
-    protected function replaceTable(&$stub, $name)
-    {
-        $name = ltrim(strtolower(preg_replace('/[A-Z]/', '_$0', str_replace($this->getNamespace($name).'\\', '', $name))), '_');
-
-        $table = Str::snake(Str::plural($name));
-
-        $stub = str_replace('DummyTable', $table, $stub);
-
-        return $this;
-    }
-
-    /**
-     * Build the class with the given name.
-     *
-     * @param  string  $name
-     * @return string
-     */
-    protected function buildClass($name)
-    {
-        $stub = $this->files->get($this->getStub());
-
-        return $this->replaceNamespace($stub, $name)->replaceTable($stub, $name)->replaceClass($stub, $name);
+        $this->call('backpack:crud-model', ['name' => $this->argument('name'), '--force' => $this->option('force')]);
     }
 }

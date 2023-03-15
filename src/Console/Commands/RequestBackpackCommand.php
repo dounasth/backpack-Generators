@@ -2,9 +2,9 @@
 
 namespace Backpack\Generators\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
+use Illuminate\Console\Command;
 
-class RequestBackpackCommand extends GeneratorCommand
+class RequestBackpackCommand extends Command
 {
     /**
      * The console command name.
@@ -18,7 +18,7 @@ class RequestBackpackCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'backpack:request {name}';
+    protected $signature = 'backpack:request {name} {--force}';
 
     /**
      * The console command description.
@@ -28,30 +28,13 @@ class RequestBackpackCommand extends GeneratorCommand
     protected $description = 'Generate a backpack templated request';
 
     /**
-     * The type of class being generated.
+     * Execute the console command.
      *
-     * @var string
-     */
-    protected $type = 'Request';
-
-    /**
-     * Get the stub file for the generator.
+     * @return bool|null
      *
-     * @return string
      */
-    protected function getStub()
+    public function handle()
     {
-        return __DIR__.'/../stubs/request.stub';
-    }
-
-    /**
-     * Get the default namespace for the class.
-     *
-     * @param  string  $rootNamespace
-     * @return string
-     */
-    protected function getDefaultNamespace($rootNamespace)
-    {
-        return $rootNamespace.'\Http\Requests';
+        $this->call('backpack:crud-request', ['name' => $this->argument('name'), '--force' => $this->option('force')]);
     }
 }
