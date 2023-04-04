@@ -9,6 +9,7 @@ use Illuminate\Support\Stringable;
 class PageControllerBackpackCommand extends GeneratorCommand
 {
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
 
     /**
      * The console command name.
@@ -111,12 +112,7 @@ class PageControllerBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        // check if base_path('stubs/backpack/generators/page-controller.stub') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/page-controller.stub'))) {
-            return base_path('stubs/backpack/generators/page-controller.stub');
-        }
-
-        return __DIR__.'/../stubs/page-controller.stub';
+        return $this->getStubPath('page-controller');
     }
 
     /**

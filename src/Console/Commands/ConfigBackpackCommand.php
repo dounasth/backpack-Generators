@@ -6,6 +6,8 @@ use Illuminate\Console\GeneratorCommand;
 
 class ConfigBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -41,12 +43,7 @@ class ConfigBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        // check if base_path('stubs/backpack/generators/config.stub') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/config.stub'))) {
-            return base_path('stubs/backpack/generators/config.stub');
-        }
-
-        return __DIR__.'/../stubs/config.stub';
+        return $this->getStubPath('config');
     }
 
     /**

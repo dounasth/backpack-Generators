@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class ModelBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -42,21 +44,12 @@ class ModelBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+
         if ($this->option('softdelete')) {
-            // check if base_path('stubs/backpack/generators/model-softdelete.stub') exists, and use that
-            if (file_exists(base_path('stubs/backpack/generators/model-softdelete.stub'))) {
-                return base_path('stubs/backpack/generators/model-softdelete.stub');
-            }
-
-            return __DIR__.'/../stubs/model-softdelete.stub';
+            return $this->getStubPath('model-softdelete');
         }
 
-        // check if base_path('stubs/backpack/generators/model.stub') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/model.stub'))) {
-            return base_path('stubs/backpack/generators/model.stub');
-        }
-
-        return __DIR__.'/../stubs/model.stub';
+        return $this->getStubPath('model');
     }
 
     /**

@@ -49,17 +49,8 @@ class GeneratorsServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        $this->offerPublishing();
         $this->commands($this->commands);
-    }
 
-    /**
-     * Enables publishing stubs.
-     *
-     * @return void
-     */
-    protected function offerPublishing(): void
-    {
         $this->publishes([
             __DIR__.'/Console/stubs' => base_path('stubs/backpack/generators'),
         ], 'stubs');

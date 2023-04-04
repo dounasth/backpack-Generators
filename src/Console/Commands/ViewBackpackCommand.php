@@ -6,6 +6,8 @@ use Illuminate\Console\GeneratorCommand;
 
 class ViewBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -42,20 +44,10 @@ class ViewBackpackCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('plain')) {
-            // check if base_path('stubs/backpack/generators/view-plain.stub') exists, and use that
-            if (file_exists(base_path('stubs/backpack/generators/view-plain.stub'))) {
-                return base_path('stubs/backpack/generators/view-plain.stub');
-            }
-
-            return __DIR__.'/../stubs/view-plain.stub';
+            return $this->getStubPath('view-plain');
         }
 
-        // check if base_path('stubs/backpack/generators/view.stub') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/view.stub'))) {
-            return base_path('stubs/backpack/generators/view.stub');
-        }
-
-        return __DIR__.'/../stubs/view.stub';
+        return $this->getStubPath('view');
     }
 
     /**

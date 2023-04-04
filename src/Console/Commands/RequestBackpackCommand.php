@@ -6,6 +6,8 @@ use Illuminate\Console\GeneratorCommand;
 
 class RequestBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -41,12 +43,7 @@ class RequestBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        // check if base_path('stubs/backpack/generators/request.stub') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/request.stub'))) {
-            return base_path('stubs/backpack/generators/request.stub');
-        }
-
-        return __DIR__.'/../stubs/request.stub';
+        return $this->getStubPath('request');
     }
 
     /**
