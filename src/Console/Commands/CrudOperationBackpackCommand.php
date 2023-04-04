@@ -55,6 +55,11 @@ class CrudOperationBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/crud-operation.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/crud-operation.stub'))) {
+            return base_path('stubs/backpack/generators/crud-operation.stub');
+        }
+
         return __DIR__.'/../stubs/crud-operation.stub';
     }
 

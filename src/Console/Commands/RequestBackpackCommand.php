@@ -41,6 +41,11 @@ class RequestBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/request.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/request.stub'))) {
+            return base_path('stubs/backpack/generators/request.stub');
+        }
+
         return __DIR__.'/../stubs/request.stub';
     }
 

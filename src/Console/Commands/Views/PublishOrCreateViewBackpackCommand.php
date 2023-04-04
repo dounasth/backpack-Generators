@@ -17,6 +17,11 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/$FILE') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/generators/'.$this->stub))) {
+            return base_path('stubs/backpack/generators/generators/'.$this->stub);
+        }
+
         return __DIR__.'/../../stubs/'.$this->stub;
     }
 

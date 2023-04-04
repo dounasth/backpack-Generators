@@ -55,6 +55,11 @@ class ChartControllerBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/chart-controller.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/chart-controller.stub'))) {
+            return base_path('stubs/backpack/generators/chart-controller.stub');
+        }
+
         return __DIR__.'/../stubs/chart-controller.stub';
     }
 

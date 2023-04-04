@@ -41,6 +41,11 @@ class ConfigBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/config.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/config.stub'))) {
+            return base_path('stubs/backpack/generators/config.stub');
+        }
+
         return __DIR__.'/../stubs/config.stub';
     }
 

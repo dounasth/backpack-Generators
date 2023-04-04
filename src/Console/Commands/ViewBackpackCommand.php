@@ -42,7 +42,17 @@ class ViewBackpackCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('plain')) {
+            // check if base_path('stubs/backpack/generators/view-plain.stub') exists, and use that
+            if (file_exists(base_path('stubs/backpack/generators/view-plain.stub'))) {
+                return base_path('stubs/backpack/generators/view-plain.stub');
+            }
+
             return __DIR__.'/../stubs/view-plain.stub';
+        }
+
+        // check if base_path('stubs/backpack/generators/view.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/view.stub'))) {
+            return base_path('stubs/backpack/generators/view.stub');
         }
 
         return __DIR__.'/../stubs/view.stub';

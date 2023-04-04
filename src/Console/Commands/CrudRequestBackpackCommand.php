@@ -93,6 +93,11 @@ class CrudRequestBackpackCommand extends BackpackCommand
      */
     protected function getStub()
     {
+        // check if base_path('stubs/backpack/generators/crud-request.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/crud-request.stub'))) {
+            return base_path('stubs/backpack/generators/crud-request.stub');
+        }
+
         return __DIR__.'/../stubs/crud-request.stub';
     }
 

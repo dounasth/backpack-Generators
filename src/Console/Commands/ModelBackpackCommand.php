@@ -43,7 +43,17 @@ class ModelBackpackCommand extends GeneratorCommand
     protected function getStub()
     {
         if ($this->option('softdelete')) {
+            // check if base_path('stubs/backpack/generators/model-softdelete.stub') exists, and use that
+            if (file_exists(base_path('stubs/backpack/generators/model-softdelete.stub'))) {
+                return base_path('stubs/backpack/generators/model-softdelete.stub');
+            }
+
             return __DIR__.'/../stubs/model-softdelete.stub';
+        }
+
+        // check if base_path('stubs/backpack/generators/model.stub') exists, and use that
+        if (file_exists(base_path('stubs/backpack/generators/model.stub'))) {
+            return base_path('stubs/backpack/generators/model.stub');
         }
 
         return __DIR__.'/../stubs/model.stub';
