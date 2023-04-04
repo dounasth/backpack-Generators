@@ -44,7 +44,6 @@ class ModelBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-
         if ($this->option('softdelete')) {
             return $this->getStubPath('model-softdelete');
         }

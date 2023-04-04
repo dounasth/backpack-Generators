@@ -10,7 +10,6 @@ trait PublishableStubTrait
      * If it doesn't, return the path to the stub in the package.
      *
      * @param  string  $path
-     *
      * @return string
      */
     public function getStubPath(string $path): string
