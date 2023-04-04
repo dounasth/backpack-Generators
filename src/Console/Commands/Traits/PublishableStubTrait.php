@@ -19,6 +19,6 @@ trait PublishableStubTrait
             return base_path('stubs/backpack/generators/{$stub}.stub');
         }
 
-        return __DIR__.'/../stubs/{$stub}.stub';
+        return __DIR__.'/../../stubs/{$stub}.stub';
     }
 }
