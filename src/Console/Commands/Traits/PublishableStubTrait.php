@@ -15,10 +15,10 @@ trait PublishableStubTrait
      */
     public function getStubPath(string $path): string
     {
-        if (file_exists(base_path('stubs/backpack/generators/{$stub}.stub'))) {
-            return base_path('stubs/backpack/generators/{$stub}.stub');
+        if (file_exists(base_path("stubs/backpack/generators/{$path}.stub"))) {
+            return base_path("stubs/backpack/generators/{$path}.stub");
         }
 
-        return __DIR__.'/../stubs/{$stub}.stub';
+        return __DIR__.'/../../stubs/{$stub}.stub';
     }
 }
