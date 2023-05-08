@@ -67,8 +67,8 @@ class CrudBackpackCommand extends BackpackCommand
             'code' => "Route::crud('$nameKebab', '{$this->convertSlashesForNamespace($nameTitle)}CrudController');",
         ]);
 
-        // Create the sidebar item
-        $this->call('backpack:add-sidebar-content', [
+        // Create the menu item
+        $this->call('backpack:add-menu-content', [
             'code' => "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ backpack_url('$nameKebab') }}\"><i class=\"nav-icon la la-question\"></i> $fullNameWithSpaces</a></li>",
         ]);
 
