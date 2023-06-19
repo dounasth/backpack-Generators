@@ -54,6 +54,8 @@ class WidgetBackpackCommand extends PublishOrCreateViewBackpackCommand
      */
     protected function getPath($name)
     {
-        return resource_path("views/vendor/backpack/base/{$this->viewNamespace}/$name.blade.php");
+        $path = 'views/vendor/backpack/ui/'.$this->viewNamespace.'/'.$name.'.blade.php';
+
+        return resource_path($path);
     }
 }
