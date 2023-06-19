@@ -56,10 +56,10 @@ class WidgetBackpackCommand extends PublishOrCreateViewBackpackCommand
      */
     protected function getPath($name)
     {
-        if($this->sourceViewNamespace) {
-            $themePath = Str::contains($this->sourceViewNamespace, '::') ? 
-                            Str::before($this->sourceViewNamespace, '::') : 
-                            Str::beforeLast($this->sourceViewNamespace, '.'); 
+        if ($this->sourceViewNamespace) {
+            $themePath = Str::contains($this->sourceViewNamespace, '::') ?
+                            Str::before($this->sourceViewNamespace, '::') :
+                            Str::beforeLast($this->sourceViewNamespace, '.');
 
             $themePath = Str::replace('.', '/', $themePath);
 
@@ -71,6 +71,5 @@ class WidgetBackpackCommand extends PublishOrCreateViewBackpackCommand
         $path = 'views/vendor/backpack/ui/'.$this->viewNamespace.'/'.$name.'.blade.php';
 
         return resource_path($path);
-
     }
 }

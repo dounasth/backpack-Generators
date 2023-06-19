@@ -11,12 +11,12 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
 
     /**
-     * The source file to copy from. 
+     * The source file to copy from.
      */
     public ?string $sourceFile = null;
 
     /**
-     * The source file view namespace
+     * The source file view namespace.
      */
     public ?string $sourceViewNamespace = null;
 
@@ -53,12 +53,14 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
     {
         $this->setupSourceFile();
 
-        if($this->sourceFile === false) { return false; }
+        if ($this->sourceFile === false) {
+            return false;
+        }
 
         $name = Str::of($this->getNameInput());
         $path = Str::of($this->getPath($name));
         $pathRelative = $path->after(base_path())->replace('\\', '/')->trim('/');
-  
+
         $this->infoBlock("Creating {$name->replace('_', ' ')->title()} {$this->type}");
         $this->progressBlock("Creating view <fg=blue>{$pathRelative}</>");
 
@@ -86,7 +88,7 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
             $namespaces = ViewNamespaces::getFor($this->viewNamespace);
             foreach ($namespaces as $namespace) {
                 $viewPath = "$namespace.$from";
-                
+
                 if (view()->exists($viewPath)) {
                     $this->sourceFile = view($viewPath)->getPath();
                     $this->sourceViewNamespace = $viewPath;
