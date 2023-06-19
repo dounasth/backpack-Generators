@@ -2,6 +2,8 @@
 
 namespace Backpack\Generators\Console\Commands\Views;
 
+use Illuminate\Support\Str;
+
 class WidgetBackpackCommand extends PublishOrCreateViewBackpackCommand
 {
     /**
@@ -54,8 +56,21 @@ class WidgetBackpackCommand extends PublishOrCreateViewBackpackCommand
      */
     protected function getPath($name)
     {
+        if($this->sourceViewNamespace) {
+            $themePath = Str::contains($this->sourceViewNamespace, '::') ? 
+                            Str::before($this->sourceViewNamespace, '::') : 
+                            Str::beforeLast($this->sourceViewNamespace, '.'); 
+
+            $themePath = Str::replace('.', '/', $themePath);
+
+            $path = 'views/vendor/'.$themePath.'/'.$this->viewNamespace.'/'.$name.'.blade.php';
+
+            return resource_path($path);
+        }
+
         $path = 'views/vendor/backpack/ui/'.$this->viewNamespace.'/'.$name.'.blade.php';
 
         return resource_path($path);
+
     }
 }
