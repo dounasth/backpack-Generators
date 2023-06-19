@@ -47,10 +47,8 @@ trait DummyClassOperation
     /**
      * Method to handle the GET request and display the View with a Backpack form
      *
-     * @param  int  $id
-     * @return \Illuminate\Contracts\View\View
      */
-    public function getDummyClassForm(int $id = null)
+    public function getDummyClassForm(?int $id = null) : \Illuminate\Contracts\View\View
     {
         $this->crud->hasAccessOrFail('dummyClass');
 
@@ -60,10 +58,9 @@ trait DummyClassOperation
     /**
     * Method to handle the POST request and perform the operation
     *
-    * @param  int  $id
     * @return array|\Illuminate\Http\RedirectResponse
     */
-    public function postDummyClassForm(int $id)
+    public function postDummyClassForm(?int $id = null)
     {
         $this->crud->hasAccessOrFail('dummyClass');
 
