@@ -11,6 +11,30 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
 
     /**
+     * The source file to copy from.
+     */
+    public ?string $sourceFile = null;
+
+    /**
+     * The source file view namespace.
+     */
+    public ?string $sourceViewNamespace = null;
+
+    /**
+     * Stub file name.
+     *
+     * @var string
+     */
+    protected $stub = '';
+
+    /**
+     * View Namespace.
+     *
+     * @var string
+     */
+    protected $viewNamespace = '';
+
+    /**
      * Get the stub file for the generator.
      *
      * @return string
@@ -27,6 +51,12 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
      */
     public function handle()
     {
+        $this->setupSourceFile();
+
+        if ($this->sourceFile === false) {
+            return false;
+        }
+
         $name = Str::of($this->getNameInput());
         $path = Str::of($this->getPath($name));
         $pathRelative = $path->after(base_path())->replace('\\', '/')->trim('/');
@@ -40,45 +70,49 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
             return false;
         }
 
-        $source = null;
+        $this->makeDirectory($path);
+
+        if ($this->sourceFile) {
+            $this->files->copy($this->sourceFile, $path);
+        } else {
+            $this->files->put($path, $this->buildClass($name));
+        }
+
+        $this->closeProgressBlock();
+    }
+
+    private function setupSourceFile()
+    {
         if ($this->option('from')) {
             $from = $this->option('from');
             $namespaces = ViewNamespaces::getFor($this->viewNamespace);
             foreach ($namespaces as $namespace) {
                 $viewPath = "$namespace.$from";
+
                 if (view()->exists($viewPath)) {
-                    $source = view($viewPath)->getPath();
+                    $this->sourceFile = view($viewPath)->getPath();
+                    $this->sourceViewNamespace = $viewPath;
                     break;
                 }
             }
 
             // full or relative file path may be provided
             if (file_exists($from)) {
-                $source = realpath($from);
+                $this->sourceFile = realpath($from);
             }
             // remove the first slash to make absolute paths relative in unix systems
             elseif (file_exists(substr($from, 1))) {
-                $source = realpath(substr($from, 1));
+                $this->sourceFile = realpath(substr($from, 1));
             }
 
-            if (! $source) {
+            if (! $this->sourceFile) {
                 $this->errorProgressBlock();
                 $this->note("$this->type '$from' does not exist!", 'red');
                 $this->newLine();
 
-                return false;
+                $this->sourceFile = false;
             }
         }
-
-        $this->makeDirectory($path);
-
-        if ($source) {
-            $this->files->copy($source, $path);
-        } else {
-            $this->files->put($path, $this->buildClass($name));
-        }
-
-        $this->closeProgressBlock();
     }
 
     /**
