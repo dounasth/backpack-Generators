@@ -69,7 +69,7 @@ class CrudBackpackCommand extends BackpackCommand
 
         // Create the menu item
         $this->call('backpack:add-menu-content', [
-            'code' => "<x-backpack::menu-item title=\"". $fullNameWithSpaces ."\" icon=\"la la-question\" :link=\"backpack_url('".$nameKebab."')\" />",
+            'code' => '<x-backpack::menu-item title="'.$fullNameWithSpaces."\" icon=\"la la-question\" :link=\"backpack_url('".$nameKebab."')\" />",
         ]);
 
         // if the application uses cached routes, we should rebuild the cache so the previous added route will

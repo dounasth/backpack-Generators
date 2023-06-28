@@ -102,7 +102,7 @@ class PageBackpackCommand extends GeneratorCommand
 
         // create the menu item
         $this->call('backpack:add-menu-content', [
-            'code' => "<x-backpack::menu-item title=\"" . $nameTitle . "\" icon=\"la la-question\" :link=\"backpack_url('" . $route . "')\" />",
+            'code' => '<x-backpack::menu-item title="'.$nameTitle."\" icon=\"la la-question\" :link=\"backpack_url('".$route."')\" />",
         ]);
 
         $url = backpack_url($route);
