@@ -67,9 +67,9 @@ class CrudBackpackCommand extends BackpackCommand
             'code' => "Route::crud('$nameKebab', '{$this->convertSlashesForNamespace($nameTitle)}CrudController');",
         ]);
 
-        // Create the sidebar item
-        $this->call('backpack:add-sidebar-content', [
-            'code' => "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ backpack_url('$nameKebab') }}\"><i class=\"nav-icon la la-question\"></i> $fullNameWithSpaces</a></li>",
+        // Create the menu item
+        $this->call('backpack:add-menu-content', [
+            'code' => '<x-backpack::menu-item title="'.$fullNameWithSpaces."\" icon=\"la la-question\" :link=\"backpack_url('".$nameKebab."')\" />",
         ]);
 
         // if the application uses cached routes, we should rebuild the cache so the previous added route will

@@ -18,7 +18,7 @@ Quickly generate Backpack templated Models, Requests, Views and Config files for
 Via Composer
 
 ``` bash
-composer require --dev backpack/generators 
+composer require --dev backpack/generators
 ```
 
 ## Usage
@@ -74,7 +74,7 @@ php artisan backpack:request {Entity_name}
 
 ``` bash
 php artisan backpack:view {Entity_name}
-``` 
+```
 
 - Generate a config file
 
@@ -122,6 +122,18 @@ php artisan backpack:widget {widget_name}
 
 // or generate a widget starting from another widget
 php artisan backpack:widget {widget_name} --from={original_widget_name}
+```
+
+- Generate a custom operation
+
+``` bash
+php artisan backpack:crud-operation {OperationName}
+```
+
+- Generate a custom form operation
+
+``` bash
+php artisan backpack:crud-form-operation {OperationName}
 ```
 
 ## Change log
