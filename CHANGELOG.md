@@ -2,36 +2,82 @@
 
 All Notable changes to `Backpack Generators` will be documented in this file
 
-## NEXT - YYYY-MM-DD
+------------
+IMPORTANT
+------------
 
-### Added
-- Nothing
+Starting with version 3, the changelog is kept inside the Releases tab in our this repo's Github page. Please check https://github.com/Laravel-Backpack/Generators/releases
 
-### Deprecated
-- Nothing
+------------
+
+## 2.0.7 - 2020-03-05
 
 ### Fixed
-- Nothing
+- Upgraded PHPUnit;
+
+
+## 2.0.6 - 2020-01-06
+
+### Fixed
+- CrudController typehint;
+
+
+## 2.0.5 - 2019-11-11
+
+### Fixed
+- when generating CRUDs, route name should only have lowercase letters;
+
+
+## 2.0.4 - 2019-09-28
+
+### Fixed
+- removed applyConfigurationFromSettings() call from operation stub, since it's now being called automatically by CrudController, before it reaches that method;
+
+
+## 2.0.3 - 2019-09-28
+
+### Fixed
+- fixed crud command had Class 'Str' not found error in CrudBackpackCommand:53;
+- models are now generated with ```$guarded``` instead of ```$fillable``` by default, since the CRUDs now only save what fields have been added by CRUD, not everything that's inside the Request; this should speed up CRUD generation A LOT, by not having to edit the model before you edit the CRUD; it's an opinionated way to do things though - some people prefer $fillable, others $guarded; both work; it's just the default that has changed;
+
+
+## 2.0.2 - 2019-09-17
+
+### Added
+- command to generate a CRUD operation; ex: ```php artisan backpack:crud-operation Moderate```
+
+
+## 2.0.1 - 2019-09-12
+
+### Fixed
+- it's better for ```setupXxxOperation()``` methods to be ```protected```;
+
+
+## 2.0.0 - 2019-09-12
+
+### Added
+- Backpack v4 support;
+- ```php artisan backpack:crud``` now also generates route and sidebar item;
 
 ### Removed
-- Nothing
+- Backpack v3 support;
 
-### Security
-- Nothing
+
+------------
 
 ## 1.2.7 - 2019-02-27
 
-## Added
+### Added
 - Backpack\Base 1.1 compatibility;
 
 ## 1.2.6 - 2019-01-16
 
-## Added
+### Added
 - CrudPanel reference to CrudController stb, for IDE code completion;
 
 ## 1.2.5 - 2018-11-22
 
-## Added
+### Added
 - support for Backpack/Base 1.0.0
 
 ## 1.2.4 - 2018-08-27

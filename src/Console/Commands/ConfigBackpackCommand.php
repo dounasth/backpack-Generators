@@ -45,29 +45,18 @@ class ConfigBackpackCommand extends GeneratorCommand
     }
 
     /**
-     * Alias for the fire method.
-     *
-     * In Laravel 5.5 the fire() method has been renamed to handle().
-     * This alias provides support for both Laravel 5.4 and 5.5.
-     */
-    public function handle()
-    {
-        $this->fire();
-    }
-
-    /**
      * Execute the console command.
      *
      * @return bool|null
      */
-    public function fire()
+    public function handle()
     {
         $name = $this->getNameInput();
 
         $path = $this->getPath($name);
 
         if ($this->alreadyExists($this->getNameInput())) {
-            $this->error($this->type.' already exists!');
+            $this->error($this->type.' already existed!');
 
             return false;
         }
@@ -82,8 +71,7 @@ class ConfigBackpackCommand extends GeneratorCommand
     /**
      * Determine if the class already exists.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return bool
      */
     protected function alreadyExists($name)
@@ -94,8 +82,7 @@ class ConfigBackpackCommand extends GeneratorCommand
     /**
      * Get the destination class path.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function getPath($name)
@@ -106,24 +93,11 @@ class ConfigBackpackCommand extends GeneratorCommand
     /**
      * Build the class with the given name.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     protected function buildClass($name)
     {
         return $this->files->get($this->getStub());
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-
-        ];
     }
 }
