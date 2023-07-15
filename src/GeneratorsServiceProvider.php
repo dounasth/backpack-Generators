@@ -8,6 +8,7 @@ use Backpack\Generators\Console\Commands\ChartControllerBackpackCommand;
 use Backpack\Generators\Console\Commands\ConfigBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudControllerBackpackCommand;
+use Backpack\Generators\Console\Commands\CrudFormOperationBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudModelBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudOperationBackpackCommand;
 use Backpack\Generators\Console\Commands\CrudRequestBackpackCommand;
@@ -34,6 +35,7 @@ class GeneratorsServiceProvider extends ServiceProvider
         CrudControllerBackpackCommand::class,
         ChartControllerBackpackCommand::class,
         CrudOperationBackpackCommand::class,
+        CrudFormOperationBackpackCommand::class,
         CrudRequestBackpackCommand::class,
         CrudBackpackCommand::class,
         ChartBackpackCommand::class,

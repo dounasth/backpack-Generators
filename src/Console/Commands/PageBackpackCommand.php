@@ -101,9 +101,9 @@ class PageBackpackCommand extends GeneratorCommand
             'code' => "Route::get('{$route}', '{$nameTitle->studly()}Controller@index')->name('page.{$nameSnake}.index');",
         ]);
 
-        // create the sidebar item
-        $this->call('backpack:add-sidebar-content', [
-            'code' => "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ backpack_url('{$route}') }}\"><i class=\"nav-icon la la-question\"></i> {$nameTitle}</a></li>",
+        // create the menu item
+        $this->call('backpack:add-menu-content', [
+            'code' => '<x-backpack::menu-item title="'.$nameTitle."\" icon=\"la la-question\" :link=\"backpack_url('".$route."')\" />",
         ]);
 
         $url = backpack_url($route);
