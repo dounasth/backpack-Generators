@@ -55,6 +55,6 @@ class GeneratorsServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/Console/stubs' => base_path('stubs/backpack/generators'),
-        ], 'stubs');
+        ], 'backpack-generators-stubs');
     }
 }

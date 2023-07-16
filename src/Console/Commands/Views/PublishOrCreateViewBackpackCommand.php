@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
 {
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
 
     /**
      * The source file to copy from.
@@ -41,12 +42,7 @@ abstract class PublishOrCreateViewBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        // check if base_path('stubs/backpack/generators/$FILE') exists, and use that
-        if (file_exists(base_path('stubs/backpack/generators/generators/'.$this->stub))) {
-            return base_path('stubs/backpack/generators/generators/'.$this->stub);
-        }
-
-        return __DIR__.'/../../stubs/'.$this->stub;
+        return $this->getStubPath($this->stub);
     }
 
     /**
