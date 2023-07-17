@@ -1,12 +1,13 @@
 <?php
 
 namespace Backpack\Generators\Console\Commands\Traits;
+
 use Illuminate\Support\Str;
 
 trait PublishableStubTrait
 {
     /**
-     * Return the path to the stub
+     * Return the path to the stub.
      */
     public function getStubPath(string $path): string
     {
