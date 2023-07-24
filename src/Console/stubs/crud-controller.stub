@@ -56,7 +56,6 @@ class DummyClassCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(DummyClassRequest::class);
-        
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
