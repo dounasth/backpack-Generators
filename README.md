@@ -19,6 +19,9 @@ Via Composer
 
 ``` bash
 composer require --dev backpack/generators
+
+// OPTIONAL: if you would like to change Backpack generated files you can publish the stubs with:
+php artisan vendor:publish --tag=backpack-generators-stubs
 ```
 
 ## Usage
