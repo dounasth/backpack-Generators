@@ -12,14 +12,6 @@
 {{-- ########################################### --}}
 {{-- Extra CSS and JS for this particular filter --}}
 
-{{-- FILTERS EXTRA CSS --}}
-{{-- push things in the after_styles section --}}
-
-{{-- @push('crud_list_styles')
-	no css
-@endpush --}}
-
-
 {{-- FILTERS EXTRA JS --}}
 {{-- push things in the after_scripts section --}}
 
