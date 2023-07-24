@@ -49,13 +49,12 @@ class GeneratorsServiceProvider extends ServiceProvider
         WidgetBackpackCommand::class,
     ];
 
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register()
+    public function boot(): void
     {
         $this->commands($this->commands);
+
+        $this->publishes([
+            __DIR__.'/Console/stubs' => base_path('stubs/backpack/generators'),
+        ], 'backpack-generators-stubs');
     }
 }

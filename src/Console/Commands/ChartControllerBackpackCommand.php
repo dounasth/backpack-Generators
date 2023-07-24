@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class ChartControllerBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -55,7 +57,7 @@ class ChartControllerBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/chart-controller.stub';
+        return $this->getStubPath('chart-controller');
     }
 
     /**

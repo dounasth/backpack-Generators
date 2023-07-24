@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class PageBackpackCommand extends GeneratorCommand
 {
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
 
     /**
      * The console command name.
@@ -120,7 +121,7 @@ class PageBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/page.stub';
+        return $this->getStubPath('page');
     }
 
     /**

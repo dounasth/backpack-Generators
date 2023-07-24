@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class CrudOperationBackpackCommand extends GeneratorCommand
 {
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
+
     /**
      * The console command name.
      *
@@ -55,7 +57,7 @@ class CrudOperationBackpackCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/crud-operation.stub';
+        return $this->getStubPath('crud-operation');
     }
 
     /**

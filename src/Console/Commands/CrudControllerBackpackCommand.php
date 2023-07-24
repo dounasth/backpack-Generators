@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 class CrudControllerBackpackCommand extends BackpackCommand
 {
     use \Backpack\CRUD\app\Console\Commands\Traits\PrettyCommandOutput;
+    use \Backpack\Generators\Console\Commands\Traits\PublishableStubTrait;
 
     /**
      * The console command name.
@@ -94,7 +95,7 @@ class CrudControllerBackpackCommand extends BackpackCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/../stubs/crud-controller.stub';
+        return $this->getStubPath('crud-controller');
     }
 
     /**
